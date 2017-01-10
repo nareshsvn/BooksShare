@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -172,8 +173,14 @@ public class SignIn extends AppCompatActivity {
                         // signed in user can be handled in the listener.
                         if (!task.isSuccessful()) {
                             Log.e("SignIn Success","Success"+task.getResult().toString());
-                        }else
-                            Log.e("SignIn Failure","Failure :"+task.getResult().toString());
+                            Toast.makeText(SignIn.this, "Account is created successfully.", Toast.LENGTH_SHORT).show();
+                            email.setText("");
+                            passWord.setText("");
+                            reEnterPassword.setText("");
+                            onBackPressed();
+                        }else {
+                            Log.e("SignIn Failure", "Failure :" + task.getResult().toString());
+                        }
                     }
                 });
     }
